@@ -1,0 +1,73 @@
+Turbo Assembler	 Version 3.1	    04/11/21 16:10:57	    Page 1
+PRG_6_1.asm
+
+
+
+      1
+      2	0000			     data segment para public "data"
+      3	0000  56 76 65 64 69 74	65+  message db	"Vvedite dve 16	cifry,$"
+      4	      20 64 76 65 20 31	36+
+      5	      20 63 69 66 72 79	2C+
+      6	      24
+      7	0016			     data ends
+      8	0000			     stk segment stack
+      9	0000  0100*(3F)		     db	256 dup	("?")
+     10	0100			     stk ends
+     11	0000			     code segment para public "code"
+     12	0000			     main proc
+     13				     assume cs:code,ds:data,ss:stk
+     14	0000  B8 0000s			     mov ax,data
+     15	0003  8E D8			     mov ds,ax
+     16	0005  B4 09			     mov ah,9
+     17	0007  BA 0000r			     mov dx,offset message
+     18	000A  CD 21			     int 21h
+     19	000C  33 C0			     xor ax,ax
+     20	000E  B4 01			     mov ah,1h
+     21	0010  CD 21			     int 21h
+     22	0012  8A D0			     mov dl,al
+     23	0014  80 EA 30			     sub dl,30h
+     24	0017  80 FA 09			     cmp dl,9h
+     25	001A  7E 03			     jle M1
+     26	001C  80 EA 07			     sub dl,7h
+     27	001F			     M1:
+     28	001F  B1 04			     mov cl,4h
+     29	0021  D2 E2			     shl dl,cl
+     30	0023  CD 21			     int 21h
+     31	0025  2C 30			     sub al,30h
+     32	0027  3C 09			     cmp al,9h
+     33	0029  7E 02			     jle M2
+     34	002B  2C 07			     sub al,7h
+     35	002D			     M2:
+     36	002D  02 D0			     add dl,al
+     37	002F  B8 4C00			     mov ax,4c00h
+     38	0032  CD 21			     int 21h
+     39	0034			     main endp
+     40	0034			     code ends
+     41				     end main
+Turbo Assembler	 Version 3.1	    04/11/21 16:10:57	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/11/21"
+??FILENAME			  Text	 "PRG_6_1 "
+??TIME				  Text	 "16:10:57"
+??VERSION			  Number 030A
+@CPU				  Text	 0101H
+@CURSEG				  Text	 CODE
+@FILENAME			  Text	 PRG_6_1
+@WORDSIZE			  Text	 2
+M1				  Near	 CODE:001F
+M2				  Near	 CODE:002D
+MAIN				  Near	 CODE:0000
+MESSAGE				  Byte	 DATA:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+CODE				  16  0034 Para	  Public  CODE
+DATA				  16  0016 Para	  Public  DATA
+STK				  16  0100 Para	  Stack
+

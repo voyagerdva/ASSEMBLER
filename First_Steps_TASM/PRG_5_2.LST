@@ -1,0 +1,74 @@
+Turbo Assembler	 Version 3.1	    04/11/21 16:31:30	    Page 1
+PRG_5_2.asm
+
+
+
+      1				     masm
+      2	0000			     model small
+      3	0000			     .stack 100h
+      4	0000			     .data
+      5	0000  53 54 41 52 54 20	4F+  message db	"START OF SEGMENT",'$'
+      6	      46 20 53 45 47 4D	45+
+      7	      4E 54 24
+      8	0011  FF		     perem_1 db	0ffh
+      9	0012  3A7F		     perem_2 dw	3a7fh
+     10	0014  F54D567A		     perem_3 dd	0f54d567ah
+     11	0018  0A*(20)		     mas db 10 dup (" ")
+     12	0022  05*(??)		     pole_1 db 5 dup (?)
+     13	0027  0014r		     adr dw perem_3
+     14	0029  00000014sr	     adr_full dd perem_3
+     15	002D  45 4E 44 20 4F 46	20+  fin db "END OF DATA SEGMENT $"
+     16	      44 41 54 41 20 53	45+
+     17	      47 4D 45 4E 54 20	24
+     18	0042			     .code
+     19	0000			     start:
+     20	0000  B8 0000s		     mov ax,@data
+     21	0003  8E D8		     mov ds,ax
+     22	0005  B4 09		     mov ah,09h
+     23	0007  BA 0000r		     mov dx,offset message
+     24	000A  CD 21		     int 21h
+     25	000C  B8 4C00		     mov ax,4c00h
+     26	000F  CD 21		     int 21h
+     27				     end start
+Turbo Assembler	 Version 3.1	    04/11/21 16:31:30	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/11/21"
+??FILENAME			  Text	 "PRG_5_2 "
+??TIME				  Text	 "16:31:30"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 PRG_5_2
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+ADR				  Word	 DGROUP:0027
+ADR_FULL			  Dword	 DGROUP:0029
+FIN				  Byte	 DGROUP:002D
+MAS				  Byte	 DGROUP:0018
+MESSAGE				  Byte	 DGROUP:0000
+PEREM_1				  Byte	 DGROUP:0011
+PEREM_2				  Word	 DGROUP:0012
+PEREM_3				  Dword	 DGROUP:0014
+POLE_1				  Byte	 DGROUP:0022
+START				  Near	 _TEXT:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  0042 Word	  Public  DATA
+_TEXT				  16  0011 Word	  Public  CODE
+

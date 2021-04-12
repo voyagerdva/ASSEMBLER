@@ -1,0 +1,73 @@
+Turbo Assembler	 Version 3.1	    04/10/21 16:19:52	    Page 1
+sample.asm
+
+
+
+      1				     masm
+      2	0000			     model small
+      3	0000			     .stack 100h
+      4	0000			     .data
+      5	0000  52 55 4E 4E 4E 4E	20+  message db	"RUNNNN	DEB",'$'
+      6	      44 45 42 24
+      7	000B  FF		     perem_1 db	0ffh
+      8	000C  3A7F		     perem_2 dw	3a7fh
+      9	000E  F54D567A		     perem_3 dd	0f54d567ah
+     10	0012  0A*(20)		     mas db 10 dup (" ")
+     11	001C  05*(??)		     pole_1 db 5 dup (?)
+     12	0021  000Er		     adr dw perem_3
+     13	0023  0000000Esr	     adr_full dd perem_3
+     14	0027  45 4E 44 20 4F 46	20+  fin db "END OF DATA SEGMENT $"
+     15	      44 41 54 41 20 53	45+
+     16	      47 4D 45 4E 54 20	24
+     17	003C			     .code
+     18	0000			     start:
+     19	0000  B8 0000s		     mov ax,@data
+     20	0003  8E D8		     mov ds,ax
+     21	0005  B4 09		     mov ah,09h
+     22	0007  BA 0000r		     mov dx,offset message
+     23	000A  CD 21		     int 21h
+     24	000C  B8 4C00		     mov ax,4c00h
+     25	000F  CD 21		     int 21h
+     26				     end start
+Turbo Assembler	 Version 3.1	    04/10/21 16:19:52	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name			  Type	 Value
+
+??DATE				  Text	 "04/10/21"
+??FILENAME			  Text	 "sample  "
+??TIME				  Text	 "16:19:52"
+??VERSION			  Number 030A
+@32BIT				  Text	 0
+@CODE				  Text	 _TEXT
+@CODESIZE			  Text	 0
+@CPU				  Text	 0101H
+@CURSEG				  Text	 _TEXT
+@DATA				  Text	 DGROUP
+@DATASIZE			  Text	 0
+@FILENAME			  Text	 SAMPLE
+@INTERFACE			  Text	 00H
+@MODEL				  Text	 2
+@STACK				  Text	 DGROUP
+@WORDSIZE			  Text	 2
+ADR				  Word	 DGROUP:0021
+ADR_FULL			  Dword	 DGROUP:0023
+FIN				  Byte	 DGROUP:0027
+MAS				  Byte	 DGROUP:0012
+MESSAGE				  Byte	 DGROUP:0000
+PEREM_1				  Byte	 DGROUP:000B
+PEREM_2				  Word	 DGROUP:000C
+PEREM_3				  Dword	 DGROUP:000E
+POLE_1				  Byte	 DGROUP:001C
+START				  Near	 _TEXT:0000
+
+Groups & Segments		  Bit Size Align  Combine Class
+
+DGROUP				  Group
+  STACK				  16  0100 Para	  Stack	  STACK
+  _DATA				  16  003C Word	  Public  DATA
+_TEXT				  16  0011 Word	  Public  CODE
+
